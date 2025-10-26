@@ -122,14 +122,14 @@
         </div>
 
         {{-- Modais --}}
-        @include('User.modais.novo')
+        @include('user.modais.novo')
 
         @foreach ($usuarios as $usuario)
-            @include('User.modais.edit', ['usuario' => $usuario])
+            @include('user.modais.edit', ['usuario' => $usuario])
         @endforeach
 
         @foreach ($usuarios as $usuario)
-            @include('User.modais.show', ['usuario' => $usuario])
+            @include('user.modais.show', ['usuario' => $usuario])
         @endforeach
     </div>
 
