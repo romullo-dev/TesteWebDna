@@ -13,13 +13,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_mysql gd mbstring zip bcmath
 
+# Instala o Composer globalmente
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-RUN chmod +x /usr/local/bin/docker-entrypoint
 
 WORKDIR /var/www
 COPY . .
 
-ENTRYPOINT ["docker-entrypoint"]
-CMD ["php-fpm"]
+# Inicia o PHP-FPM diretamente (sem entrypoint)
+CMD ["php-fpm", "-F"]
