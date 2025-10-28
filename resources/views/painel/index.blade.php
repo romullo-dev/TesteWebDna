@@ -73,11 +73,7 @@
     </div>
 
     {{-- 📂 Exportar --}}
-    <div class="text-end mt-5">
-        <a href="#" class="btn btn-dna fw-bold rounded-pill shadow-sm text-dark px-4 py-2">
-            <i class="bi bi-file-earmark-excel-fill me-2"></i> Exportar Relatório Excel
-        </a>
-    </div>
+    
 </div>
 
 {{-- 📊 Chart.js --}}
