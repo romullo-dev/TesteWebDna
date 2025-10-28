@@ -50,7 +50,7 @@ class UsuarioController extends Controller
 
             return redirect()->back()->with('success', 'Usuário cadastrado com sucesso!');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao cadastrar usuário.' . $e);
+            return redirect()->back()->with('error', 'Erro ao cadastrar usuário.' );
         }
     }
 
