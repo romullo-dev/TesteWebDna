@@ -13,11 +13,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_mysql gd mbstring zip bcmath
 
-# Instala o Composer globalmente
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 COPY . .
 
-# Inicia o PHP-FPM diretamente (sem entrypoint)
 CMD ["php-fpm", "-F"]
