@@ -58,29 +58,27 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## Executando com Docker
 
-Este projeto inclui uma stack Docker preparada para desenvolvimento local.
+Este projeto inclui uma stack Docker preparada para desenvolvimento local e implantação em produção utilizando Docker Compose.
 
-1. Copie o arquivo de variáveis de ambiente padrão para `.env` (o contêiner também fará isso automaticamente na primeira execução):
+1. Ajuste as variáveis de ambiente desejadas no arquivo `.env.docker`. Caso um arquivo `.env` ainda não exista, o contêiner `app` copiará esse arquivo na primeira execução.
 
-   ```bash
-   cp .env.example .env
-   ```
-
-2. Suba os serviços necessários (PHP-FPM, Nginx, MariaDB e phpMyAdmin):
+2. Construa as imagens e suba os serviços necessários (PHP-FPM, Nginx, MariaDB e phpMyAdmin):
 
    ```bash
    docker compose up -d --build
    ```
 
-3. Após os contêineres estarem em execução, aplique as migrações:
+3. O contêiner PHP executará automaticamente a instalação das dependências, gerará uma chave de aplicação (quando necessário), aguardará o banco de dados iniciar, executará as migrações e otimizará o cache da aplicação.
 
-   ```bash
-   docker compose exec app php artisan migrate
-   ```
+4. A aplicação ficará disponível em [http://localhost](http://localhost) (porta 80) e o phpMyAdmin em [http://localhost:8081](http://localhost:8081).
 
-4. A aplicação ficará disponível em [http://localhost:8080](http://localhost:8080) e o phpMyAdmin em [http://localhost:8081](http://localhost:8081).
+Para acompanhar os logs do processo de inicialização e das migrações automáticas, utilize:
 
-Os comandos acima garantem que as dependências PHP sejam instaladas automaticamente e que a chave da aplicação seja gerada ao iniciar o contêiner `app`.
+```bash
+docker compose logs -f app
+```
+
+Em um ambiente de produção, lembre-se de atualizar `APP_URL`, `APP_KEY` (caso deseje definir manualmente), credenciais de banco e mapeamento de portas conforme necessário.
 
 ## License
 
